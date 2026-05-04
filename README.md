@@ -183,7 +183,6 @@ GROUP BY segment;
 **Kislay Kumar**  
 B.Tech Chemical Engineering — NIT Warangal (2028)  
 📧 kumarkislay245@gmail.com  
-🔗 [LinkedIn](https://linkedin.com) | [GitHub](https://github.com)
 
 ---
 
