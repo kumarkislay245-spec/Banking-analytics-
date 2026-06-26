@@ -1,318 +1,235 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Banking Analytics Banner</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+![Banking Analytics Banner](banking_readme_banner.png)
 
-  body {
-    width: 1200px;
-    background: #0a0f1e;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    overflow: hidden;
-  }
+# 🏦 Banking Analytics
 
-  .banner {
-    width: 1200px;
-    height: 400px;
-    background: linear-gradient(135deg, #0a0f1e 0%, #0d1b35 50%, #0a0f1e 100%);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 48px 64px;
-  }
+> Analyzing banking data to uncover customer trends, transaction behavior, and financial performance using SQL, Python, and Power BI.
 
-  /* grid lines background */
-  .banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(30,144,255,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30,144,255,0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
+---
 
-  /* glow orbs */
-  .orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-  }
-  .orb-1 { width: 360px; height: 360px; background: rgba(29,100,255,0.18); top: -80px; right: 160px; }
-  .orb-2 { width: 240px; height: 240px; background: rgba(0,200,130,0.12); bottom: -60px; right: 60px; }
-  .orb-3 { width: 200px; height: 200px; background: rgba(120,40,255,0.10); top: 40px; left: 500px; }
+## 📌 Overview
 
-  /* top badge */
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: rgba(29,100,255,0.15);
-    border: 1px solid rgba(29,100,255,0.35);
-    border-radius: 99px;
-    padding: 5px 14px;
-    font-size: 12px;
-    color: #60a5fa;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 20px;
-    width: fit-content;
-  }
-  .badge-dot {
-    width: 6px; height: 6px;
-    background: #3b82f6;
-    border-radius: 50%;
-    box-shadow: 0 0 6px #3b82f6;
-  }
+This project performs end-to-end analysis on a banking dataset to derive actionable business insights. It covers data cleaning, exploratory data analysis (EDA), SQL-based querying, and data visualization — helping simulate how banks can leverage data for smarter decisions.
 
-  /* main title */
-  .title {
-    font-size: 52px;
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-  .title span {
-    background: linear-gradient(90deg, #3b82f6, #06b6d4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+---
 
-  /* subtitle */
-  .subtitle {
-    font-size: 16px;
-    color: #94a3b8;
-    margin-bottom: 36px;
-    font-weight: 400;
-    max-width: 560px;
-    line-height: 1.5;
-  }
+## 🎯 Objectives
 
-  /* pipeline */
-  .pipeline {
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
+- Understand **customer behavior** and segment high-value customers
+- Analyze **transaction patterns** — deposits, withdrawals, and account activity
+- Evaluate **loan distribution** across customer segments
+- Detect **financial trends** to support risk management
+- Present findings through **interactive dashboards**
 
-  .pipe-step {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 10px;
-    padding: 10px 18px;
-    transition: all 0.2s;
-  }
+---
 
-  .pipe-icon {
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-  .icon-sql  { background: rgba(249,115,22,0.18); }
-  .icon-py   { background: rgba(59,130,246,0.18); }
-  .icon-bi   { background: rgba(234,179,8,0.18); }
-  .icon-dash { background: rgba(0,200,130,0.18); }
+## 🗂️ Dataset
 
-  .pipe-text { display: flex; flex-direction: column; }
-  .pipe-label { font-size: 13px; font-weight: 600; color: #e2e8f0; }
-  .pipe-desc  { font-size: 11px; color: #64748b; margin-top: 1px; }
+The dataset includes the following key entities:
 
-  .pipe-arrow {
-    width: 32px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .pipe-arrow svg { opacity: 0.35; }
+| Table / Feature     | Description                                      |
+|---------------------|--------------------------------------------------|
+| Customer Details    | Demographics, account type, customer ID          |
+| Account Info        | Balances, account status, account creation date  |
+| Transactions        | Transaction type, amount, date, channel          |
+| Loan Records        | Loan type, amount, repayment status              |
 
-  /* right side stats */
-  .stats {
-    position: absolute;
-    right: 64px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
+> ⚠️ *The dataset used is for educational/analytical purposes only.*
 
-  .stat-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 14px 20px;
-    min-width: 150px;
-    text-align: center;
-  }
+---
 
-  .stat-value {
-    font-size: 26px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1;
-  }
-  .stat-value.blue { color: #60a5fa; }
-  .stat-value.green { color: #34d399; }
-  .stat-value.yellow { color: #fbbf24; }
+## 📊 Dashboard Screenshots
 
-  .stat-label {
-    font-size: 11px;
-    color: #475569;
-    margin-top: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 500;
-  }
+### 🎯 Problem Statement
+![Problem Statement](img1_problem_statement.png)
 
-  /* author strip at bottom */
-  .author-strip {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 40px;
-    background: rgba(255,255,255,0.02);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    align-items: center;
-    padding: 0 64px;
-    gap: 24px;
-  }
-  .author-name { font-size: 12px; color: #64748b; font-weight: 500; }
-  .author-sep  { color: #1e293b; font-size: 16px; }
-  .author-tag  { 
-    font-size: 11px; 
-    color: #3b82f6; 
-    background: rgba(59,130,246,0.1); 
-    border: 1px solid rgba(59,130,246,0.2);
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-weight: 500;
-  }
+---
 
-  /* decorative chart lines on far right */
-  .deco-chart {
-    position: absolute;
-    right: 280px;
-    bottom: 48px;
-    opacity: 0.08;
-  }
-</style>
-</head>
-<body>
-<div class="banner">
+### 🏠 Home — Overview Dashboard
+![Home Dashboard](img2_home_male.png)
 
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+![Home Dashboard — Female Filter](img3_home_female.png)
 
-  <!-- decorative chart -->
-  <svg class="deco-chart" width="120" height="80" viewBox="0 0 120 80">
-    <polyline points="0,70 20,55 40,60 60,35 80,40 100,15 120,20" fill="none" stroke="#3b82f6" stroke-width="2"/>
-    <polyline points="0,80 20,72 40,75 60,60 80,65 100,45 120,50" fill="none" stroke="#06b6d4" stroke-width="1.5"/>
-  </svg>
+---
 
-  <!-- badge -->
-  <div class="badge">
-    <div class="badge-dot"></div>
-    End-to-End Analytics Project
-  </div>
+### 💰 Loan Analysis
+![Loan Analysis](img4_loan_analysis.png)
 
-  <!-- title -->
-  <div class="title">Banking <span>Analytics</span></div>
-  <div class="subtitle">Risk profiling, loan analysis &amp; customer insights across demographic and financial segments</div>
+---
 
-  <!-- pipeline -->
-  <div class="pipeline">
+### 🏦 Deposit Analysis
+![Deposit Analysis](img5_deposit_analysis.png)
 
-    <div class="pipe-step">
-      <div class="pipe-icon icon-sql">🗄️</div>
-      <div class="pipe-text">
-        <span class="pipe-label">PostgreSQL</span>
-        <span class="pipe-desc">Data joins &amp; querying</span>
-      </div>
-    </div>
+---
 
-    <div class="pipe-arrow">
-      <svg width="24" height="14" viewBox="0 0 24 14">
-        <path d="M0 7h20M14 1l6 6-6 6" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+### ⚠️ Risk Insights
+![Risk Insights](img6_risk_insights.png)
 
-    <div class="pipe-step">
-      <div class="pipe-icon icon-py">🐍</div>
-      <div class="pipe-text">
-        <span class="pipe-label">Python</span>
-        <span class="pipe-desc">EDA &amp; feature engineering</span>
-      </div>
-    </div>
+---
 
-    <div class="pipe-arrow">
-      <svg width="24" height="14" viewBox="0 0 24 14">
-        <path d="M0 7h20M14 1l6 6-6 6" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+### 🧠 Data Insights
+![Data Insights](img7_data_insights.png)
 
-    <div class="pipe-step">
-      <div class="pipe-icon icon-bi">📊</div>
-      <div class="pipe-text">
-        <span class="pipe-label">Power BI</span>
-        <span class="pipe-desc">Interactive dashboard</span>
-      </div>
-    </div>
+---
 
-    <div class="pipe-arrow">
-      <svg width="24" height="14" viewBox="0 0 24 14">
-        <path d="M0 7h20M14 1l6 6-6 6" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+### 📋 Action Plan
+![Action Plan](img8_action_plan.png)
 
-    <div class="pipe-step">
-      <div class="pipe-icon icon-dash">💡</div>
-      <div class="pipe-text">
-        <span class="pipe-label">Insights</span>
-        <span class="pipe-desc">7-point action plan</span>
-      </div>
-    </div>
+---
 
-  </div>
+## 🔍 Key Analyses
 
-  <!-- right side stats -->
-  <div class="stats">
-    <div class="stat-card">
-      <div class="stat-value blue">3K+</div>
-      <div class="stat-label">Customers</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value green">4.38bn</div>
-      <div class="stat-label">Total Loans</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value yellow">7</div>
-      <div class="stat-label">Risk Insights</div>
-    </div>
-  </div>
+### 1. 👥 Customer Segmentation
+- Identify high-value customers based on balance and transaction frequency
+- Segment by account type and activity level
 
-  <!-- author strip -->
-  <div class="author-strip">
-    <span class="author-name">Kislay Kumar · NIT Warangal</span>
-    <span class="author-sep">|</span>
-    <span class="author-tag">BFSI Domain</span>
-    <span class="author-tag">Risk Analytics</span>
-    <span class="author-tag">Business Intelligence</span>
-  </div>
+### 2. 💳 Transaction Analysis
+- Trends in deposits vs. withdrawals over time
+- High-frequency transaction detection
+- Channel-wise transaction breakdown (online, branch, ATM)
 
-</div>
-</body>
-</html>
+### 3. 🏠 Loan Analysis
+- Distribution of loan amounts by customer segment
+- Loan approval vs. default patterns
+- Risk profiling based on repayment behavior
+
+### 4. 📊 Account Activity
+- Dormant vs. active account identification
+- Balance trend analysis over time
+
+---
+
+## 🛠️ Tools & Technologies
+
+| Category         | Tools                              |
+|------------------|------------------------------------|
+| Language         | Python, SQL                        |
+| Data Processing  | Pandas, NumPy                      |
+| Visualization    | Matplotlib, Power BI               |
+| Database         | PostgreSQL                         |
+| IDE              | Jupyter Notebook, VS Code          |
+| Productivity     | MS Excel                           |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+```bash
+pip install pandas numpy matplotlib seaborn sqlalchemy psycopg2-binary jupyter
+```
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/your-username/banking-analytics.git
+cd banking-analytics
+```
+
+### Run the Notebook
+
+```bash
+jupyter notebook notebooks/banking_analytics.ipynb
+```
+
+### SQL Setup
+
+```sql
+CREATE DATABASE banking;
+-- Connect and run your schema/data import scripts
+```
+
+---
+
+## 📁 Project Structure
+
+```
+banking-analytics/
+│
+├── data/
+│   ├── raw/                        # Raw dataset files
+│   └── cleaned/                    # Cleaned & processed data
+│
+├── notebooks/
+│   └── banking_analytics.ipynb    # Main analysis notebook
+│
+├── sql/
+│   ├── schema.sql                  # Table creation scripts
+│   └── queries.sql                 # Analysis queries
+│
+├── dashboards/
+│   └── banking_dashboard.pbix     # Power BI dashboard
+│
+├── screenshots/                   # Dashboard screenshots
+│
+└── README.md
+```
+
+---
+
+## 💡 Sample SQL Queries
+
+```sql
+-- Top 10 high-value customers by balance
+SELECT customer_id, name, account_type, balance
+FROM customers
+ORDER BY balance DESC
+LIMIT 10;
+
+-- Monthly transaction trend
+SELECT DATE_FORMAT(transaction_date, '%Y-%m') AS month,
+       SUM(CASE WHEN type = 'deposit' THEN amount ELSE 0 END) AS total_deposits,
+       SUM(CASE WHEN type = 'withdrawal' THEN amount ELSE 0 END) AS total_withdrawals
+FROM transactions
+GROUP BY month
+ORDER BY month;
+
+-- Loan default rate by customer segment
+SELECT segment,
+       COUNT(*) AS total_loans,
+       SUM(CASE WHEN status = 'defaulted' THEN 1 ELSE 0 END) AS defaults,
+       ROUND(SUM(CASE WHEN status = 'defaulted' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS default_rate
+FROM loans
+JOIN customers USING(customer_id)
+GROUP BY segment;
+```
+
+---
+
+## 📈 Results & Insights
+
+- 🔎 Checking Accounts & Bank Deposits have **extremely high correlation (0.84)** — indicating low-risk, stable customers
+- 💼 Business Lending correlates moderately with Bank Loans — **dual credit exposure risk zone**
+- ⚠️ Male customers show **higher probability of credit default** than females
+- 📊 European customers hold the **highest total loans (1.94bn)** across all nationalities
+- 💳 Females distribute credit across 2–3 cards (lower risk); males concentrate on 1 card (higher pressure)
+
+---
+
+## 🧠 Business Impact
+
+| Insight                            | Business Value                                   |
+|------------------------------------|--------------------------------------------------|
+| High-value customer identification | Targeted retention & loyalty programs            |
+| Loan default risk profiling        | Improved credit risk management                  |
+| Gender-based risk weighting        | Tailored underwriting and credit products        |
+| Loyalty classification analysis    | Tiered rewards and re-engagement strategies      |
+| Occupation-based risk patterns     | Flexible EMI structures for irregular income     |
+
+---
+
+## 👤 Author
+
+**Kislay Kumar**
+B.Tech Chemical Engineering — NIT Warangal (2028)
+📧 kumarkislay245@gmail.com
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
+
+*⭐ If you found this project useful, consider giving it a star!*
