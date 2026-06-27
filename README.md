@@ -39,47 +39,47 @@ The dataset includes the following key entities:
 
 ### 🎯 Problem Statement
 
-![Problem Statement](screenshots/img1_problem_statement.png)
+![Problem Statement](https://github.com/kumarkislay245-spec/Banking-analytics-/blob/main/Screenshot%202026-06-26%20155657.png)
 
 ---
 
 ### 🏠 Home — Overview Dashboard (Male Filter)
 
-![Home Dashboard Male](screenshots/img2_home_male.png)
+![Home Dashboard Male](https://github.com/kumarkislay245-spec/Banking-analytics-/blob/main/Screenshot%202026-06-26%20155717.png)
 
 ### 🏠 Home — Overview Dashboard (Female Filter)
 
-![Home Dashboard Female](screenshots/img3_home_female.png)
+![Home Dashboard Female](https://github.com/kumarkislay245-spec/Banking-analytics-/blob/main/Screenshot%202026-06-26%20155726.png)
 
 ---
 
 ### 💰 Loan Analysis
 
-![Loan Analysis](screenshots/img4_loan_analysis.png)
+![Loan Analysis](https://github.com/kumarkislay245-spec/Banking-analytics-/blob/main/Screenshot%202026-06-26%20155821.png)
 
 ---
 
 ### 🏦 Deposit Analysis
 
-![Deposit Analysis](screenshots/img5_deposit_analysis.png)
+![Deposit Analysis](https://github.com/kumarkislay245-spec/Banking-analytics-/blob/main/Screenshot%202026-06-26%20155829.png)
 
 ---
 
 ### ⚠️ Risk Insights
 
-![Risk Insights](screenshots/img6_risk_insights.png)
+![Risk Insights](https://github.com/kumarkislay245-spec/Banking-analytics-/blob/main/Screenshot%202026-06-26%20155839.png)
 
 ---
 
 ### 🧠 Data Insights
 
-![Data Insights](screenshots/img7_data_insights.png)
+![Data Insights](https://github.com/kumarkislay245-spec/Banking-analytics-/blob/main/Screenshot%202026-06-26%20155848.png)
 
 ---
 
 ### 📋 Action Plan
 
-![Action Plan](screenshots/img8_action_plan.png)
+![Action Plan](https://github.com/kumarkislay245-spec/Banking-analytics-/blob/main/Screenshot%202026-06-26%20155856.png)
 
 ---
 
