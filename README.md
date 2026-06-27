@@ -1,5 +1,3 @@
-![Banking Analytics Banner](banking_readme_banner.png)
-
 # 🏦 Banking Analytics
 
 > Analyzing banking data to uncover customer trends, transaction behavior, and financial performance using SQL, Python, and Power BI.
@@ -40,39 +38,48 @@ The dataset includes the following key entities:
 ## 📊 Dashboard Screenshots
 
 ### 🎯 Problem Statement
-![Problem Statement](img1_problem_statement.png)
+
+![Problem Statement](screenshots/img1_problem_statement.png)
 
 ---
 
-### 🏠 Home — Overview Dashboard
-![Home Dashboard](img2_home_male.png)
+### 🏠 Home — Overview Dashboard (Male Filter)
 
-![Home Dashboard — Female Filter](img3_home_female.png)
+![Home Dashboard Male](screenshots/img2_home_male.png)
+
+### 🏠 Home — Overview Dashboard (Female Filter)
+
+![Home Dashboard Female](screenshots/img3_home_female.png)
 
 ---
 
 ### 💰 Loan Analysis
-![Loan Analysis](img4_loan_analysis.png)
+
+![Loan Analysis](screenshots/img4_loan_analysis.png)
 
 ---
 
 ### 🏦 Deposit Analysis
-![Deposit Analysis](img5_deposit_analysis.png)
+
+![Deposit Analysis](screenshots/img5_deposit_analysis.png)
 
 ---
 
 ### ⚠️ Risk Insights
-![Risk Insights](img6_risk_insights.png)
+
+![Risk Insights](screenshots/img6_risk_insights.png)
 
 ---
 
 ### 🧠 Data Insights
-![Data Insights](img7_data_insights.png)
+
+![Data Insights](screenshots/img7_data_insights.png)
 
 ---
 
 ### 📋 Action Plan
-![Action Plan](img8_action_plan.png)
+
+![Action Plan](screenshots/img8_action_plan.png)
 
 ---
 
@@ -122,8 +129,8 @@ pip install pandas numpy matplotlib seaborn sqlalchemy psycopg2-binary jupyter
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/banking-analytics.git
-cd banking-analytics
+git clone https://github.com/kumarkislay245-spec/Banking-analytics.git
+cd Banking-analytics
 ```
 
 ### Run the Notebook
@@ -161,6 +168,14 @@ banking-analytics/
 │   └── banking_dashboard.pbix     # Power BI dashboard
 │
 ├── screenshots/                   # Dashboard screenshots
+│   ├── img1_problem_statement.png
+│   ├── img2_home_male.png
+│   ├── img3_home_female.png
+│   ├── img4_loan_analysis.png
+│   ├── img5_deposit_analysis.png
+│   ├── img6_risk_insights.png
+│   ├── img7_data_insights.png
+│   └── img8_action_plan.png
 │
 └── README.md
 ```
